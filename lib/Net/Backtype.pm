@@ -101,11 +101,61 @@ Net::Backtype - client for the backtype API
 =head1 SYNOPSIS
 
   use Net::Backtype;
-  my $client = Net::Backtype->new(format => 'json', api_key => 'foo');
+  my $client = Net::Backtype->new();
 
 =head1 DESCRIPTION
 
 Net::Backtype is a client for the backtype API
+
+=head2 METHODS 
+
+=over 4
+
+=item B<user_comment>
+
+See L<http://www.backtype.com/developers/user-comments>.
+
+=item B<user_followers>
+
+See L<http://www.backtype.com/developers/user-followers>.
+
+=item B<user_following>
+
+See L<http://www.backtype.com/developers/user-following>.
+
+=item B<user_home>
+
+See L<http://www.backtype.com/developers/user-home-feed>.
+
+=item B<user_profile>
+
+See L<http://www.backtype.com/developers/user-profile>.
+
+=item B<comments_search>
+
+See L<http://www.backtype.com/developers/comments-search>.
+
+=item B<comments_connect>
+
+See L<http://www.backtype.com/developers/comments-connect>.
+
+=item B<comments_connect_stats>
+
+See L<http://www.backtype.com/developers/comments-connect-stats>.
+
+=item B<comments_author>
+
+See L<http://www.backtype.com/developers/url-comments>.
+
+=item B<comments_page>
+
+See L<http://www.backtype.com/developers/page-comments>.
+
+=item B<comments_page_stats>
+
+See L<http://www.backtype.com/developers/page-comments-stats>.
+
+=back
 
 =head1 AUTHOR
 
