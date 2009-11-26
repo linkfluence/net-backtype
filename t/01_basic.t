@@ -5,8 +5,10 @@ use Net::Backtype;
 use Net::Backtweet;
 use YAML::Syck;
 
-sum_methods( 'Net::Backtype',  11 );
-sum_methods( 'Net::Backtweet', 12 );
+BEGIN {
+    plan skip_all => 'set $ENV{BACKTYPE_KEY} for this test'
+        unless $ENV{BACKTYPE_KEY};
+}
 
 my $obj = Net::Backtweet->new;
 ok $obj, '... object created';
@@ -14,17 +16,10 @@ my $method = $obj->meta->find_method_by_name('user_comments');
 ok $method->meta->has_attribute('method'), '... got method as attribute';
 is $method->method, 'GET', '... method is GET';
 
+my $res = $obj->backtweet_search(
+    key => $ENV{BACKTYPE_KEY},
+    q   => 'http://lumberjaph.net'
+);
 
+cmp_ok scalar @{ $res->{tweets} }, '>=', 1, '... got more than one result';
 done_testing;
-
-sub sum_methods {
-    my $module = shift;
-    my $expect = shift;
-    my $obj = $module->new();
-    my @methods = $obj->meta->get_all_methods();
-    my $total = 0;
-    foreach my $m (@methods) {
-        ++$total if $m->meta->has_attribute('description');
-    }
-    is $total, $expect, "... got $expect methods in our client";
-}

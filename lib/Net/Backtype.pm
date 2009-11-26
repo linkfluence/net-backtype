@@ -5,14 +5,11 @@ use MooseX::Net::API;
 
 our $VERSION = '0.01';
 
-has api_base_url => (
-    isa     => 'Str',
-    is      => 'rw',
-    default => 'http://api.backtype.com'
+net_api_declare backtype => (
+    base_url    => 'http://api.backtype.com',
+    format      => 'json',
+    format_mode => 'append',
 );
-has format => ( is => 'ro', isa => 'Str', default => 'json', );
-
-format_query 'format' => ( mode => 'append' );
 
 net_api_method user_comments => (
     path     => '/user/$user/comments',
@@ -102,6 +99,7 @@ Net::Backtype - client for the backtype API
 
   use Net::Backtype;
   my $client = Net::Backtype->new();
+  my $res = $client->comments_page(url => 'http://...', key => $mykey);
 
 =head1 DESCRIPTION
 
@@ -159,11 +157,15 @@ See L<http://www.backtype.com/developers/page-comments-stats>.
 
 =head1 AUTHOR
 
-franck cuny E<lt>franck.cuny@rtgi.frE<gt>
+franck cuny E<lt>franckcuny@lumberjaph.netE<gt>
 
 =head1 SEE ALSO
 
 =head1 LICENSE
+
+Copyright 2009 by Linkfluence
+
+http://linkfluence.net
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
